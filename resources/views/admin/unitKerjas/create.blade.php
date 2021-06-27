@@ -1,0 +1,43 @@
+@extends('layouts.admin')
+@section('content')
+
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.create') }} {{ trans('cruds.unitKerja.title_singular') }}
+    </div>
+
+    <div class="card-body">
+        <form method="POST" action="{{ route("admin.unit-kerjas.store") }}" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <label class="required" for="nama_unit_kerja">{{ trans('cruds.unitKerja.fields.nama_unit_kerja') }}</label>
+                <input class="form-control {{ $errors->has('nama_unit_kerja') ? 'is-invalid' : '' }}" type="text" name="nama_unit_kerja" id="nama_unit_kerja" value="{{ old('nama_unit_kerja', '') }}" required>
+                @if($errors->has('nama_unit_kerja'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('nama_unit_kerja') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.unitKerja.fields.nama_unit_kerja_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="keterangan">{{ trans('cruds.unitKerja.fields.keterangan') }}</label>
+                <input class="form-control {{ $errors->has('keterangan') ? 'is-invalid' : '' }}" type="text" name="keterangan" id="keterangan" value="{{ old('keterangan', '') }}">
+                @if($errors->has('keterangan'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('keterangan') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.unitKerja.fields.keterangan_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-danger" type="submit">
+                    {{ trans('global.save') }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@endsection
