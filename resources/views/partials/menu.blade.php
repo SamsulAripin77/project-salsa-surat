@@ -119,80 +119,7 @@
                 </ul>
             </li>
         @endcan
-        @can('set_presensi_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/shifts*") ? "c-show" : "" }} {{ request()->is("admin/jadwals*") ? "c-show" : "" }} {{ request()->is("admin/hari-liburs*") ? "c-show" : "" }}">
-                <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                    <i class="fa-fw far fa-sun c-sidebar-nav-icon">
 
-                    </i>
-                    {{ trans('cruds.setPresensi.title') }}
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
-                    @can('shift_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.shifts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/shifts") || request()->is("admin/shifts/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-clock c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.shift.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('jadwal_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.jadwals.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/jadwals") || request()->is("admin/jadwals/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-calendar c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.jadwal.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('hari_libur_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.hari-liburs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/hari-liburs") || request()->is("admin/hari-liburs/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-sun c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.hariLibur.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
-        @can('presensi_access')
-            <li class="c-sidebar-nav-dropdown {{ request()->is("admin/presensi-hadirs*") ? "c-show" : "" }} {{ request()->is("admin/presensi-tidak-hadirs*") ? "c-show" : "" }}">
-                <a class="c-sidebar-nav-dropdown-toggle" href="#">
-                    <i class="fa-fw fas fa-prescription-bottle-alt c-sidebar-nav-icon">
-
-                    </i>
-                    {{ trans('cruds.presensi.title') }}
-                </a>
-                <ul class="c-sidebar-nav-dropdown-items">
-                    @can('presensi_hadir_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.presensi-hadirs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/presensi-hadirs") || request()->is("admin/presensi-hadirs/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-calendar c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.presensiHadir.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('presensi_tidak_hadir_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.presensi-tidak-hadirs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/presensi-tidak-hadirs") || request()->is("admin/presensi-tidak-hadirs/*") ? "c-active" : "" }}">
-                                <i class="fa-fw far fa-calendar c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.presensiTidakHadir.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                </ul>
-            </li>
-        @endcan
         @can('laporan_access')
             <li class="c-sidebar-nav-dropdown {{ request()->is("admin/laporan-harians*") ? "c-show" : "" }} {{ request()->is("admin/laporan-poto-harians*") ? "c-show" : "" }} {{ request()->is("admin/laporan-harian-keterlambatans*") ? "c-show" : "" }} {{ request()->is("admin/laporan-bulanans*") ? "c-show" : "" }} {{ request()->is("admin/laporan-bulan-pegawais*") ? "c-show" : "" }} {{ request()->is("admin/laporan-periodiks*") ? "c-show" : "" }} {{ request()->is("admin/laporan-resume-bulanans*") ? "c-show" : "" }}">
                 <a class="c-sidebar-nav-dropdown-toggle" href="#">
@@ -275,17 +202,6 @@
                 </ul>
             </li>
         @endcan
-        @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
-            @can('profile_password_edit')
-                <li class="c-sidebar-nav-item">
-                    <a class="c-sidebar-nav-link {{ request()->is('profile/password') || request()->is('profile/password/*') ? 'c-active' : '' }}" href="{{ route('profile.password.edit') }}">
-                        <i class="fa-fw fas fa-key c-sidebar-nav-icon">
-                        </i>
-                        {{ trans('global.change_password') }}
-                    </a>
-                </li>
-            @endcan
-        @endif
         <li class="c-sidebar-nav-item">
             <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                 <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
