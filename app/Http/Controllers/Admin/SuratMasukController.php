@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\SuratMasuk;
+use App\{SuratMasuk,Kategori};
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class SuratMasukController extends Controller
@@ -14,7 +16,8 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        //
+        $surats = SuratMasuk::simplePaginate(5);
+        return view('admin.surats.index', compact('surats'));
     }
 
     /**
@@ -24,7 +27,8 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        //
+        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
+        return view('admin.surats.create',compact('kategoris'));
     }
 
     /**
@@ -35,7 +39,19 @@ class SuratMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            
+        ]);
+        $path = $request->file('lampiran')->store('public/lampiran');
+        SuratMasuk::create(['lampiran'=> $path,
+                            'tgl_surat' => $request->get('tgl_surat'),
+                            'no_surat' => $request->get('no_surat'),
+                            'pengirim' => $request->get('pengirim'),
+                            'hal' => $request->get('hal'),
+                            'kategori_id' => $request->get('kategori_id'),
+                            'alamat' => $request->get('alamat'),
+                            'user_id' => Auth::id()]);
+        return redirect()->route('admin.suratmasuks.index');
     }
 
     /**
@@ -80,6 +96,7 @@ class SuratMasukController extends Controller
      */
     public function destroy(SuratMasuk $suratMasuk)
     {
-        //
+        $suratMasuk->delete();
+        return back();
     }
 }

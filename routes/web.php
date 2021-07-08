@@ -22,6 +22,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //kategori
     Route::resource('kategoris','KategoriController');
 
+    //surat masuks
+    Route::resource('suratmasuks','SuratMasukController');
+
     // Audit Logs
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
