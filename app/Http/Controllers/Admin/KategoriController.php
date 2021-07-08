@@ -15,7 +15,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        
+        $kategoris = Kategori::simplePaginate(10);
+        return view('admin.kategoris.index',compact('kategoris'));
     }
 
     /**
@@ -63,7 +64,7 @@ class KategoriController extends Controller
      */
     public function edit(Kategori $kategori)
     {
-        //
+        return view('admin.kategoris.edit', compact('kategori'));
     }
 
     /**
@@ -75,7 +76,8 @@ class KategoriController extends Controller
      */
     public function update(Request $request, Kategori $kategori)
     {
-        //
+        $kategori->update($request->all());
+        return redirect()->route('admin.kategoris.index');
     }
 
     /**
@@ -87,5 +89,7 @@ class KategoriController extends Controller
     public function destroy(Kategori $kategori)
     {
         //
+        $kategori->delete();
+        return back();
     }
 }
