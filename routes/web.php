@@ -1,6 +1,6 @@
 <?php
 
-Route::view('/', 'welcome');
+Route::view('/', 'auth/login');
 Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function () {
@@ -9,7 +9,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');
 
-    // Roles
+    // R
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
     Route::resource('roles', 'RolesController');
 
@@ -18,6 +18,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     //surat masuks
     Route::resource('suratkeluars','SuratKeluarController');
+
+    //pengarahan surat masuks
+    Route::resource('pengarahansuratmasuks','PengarahanSuratMasukController');
+
+     //pengarahan surat masuks
+     Route::resource('pengarahansuratkeluars','PengarahanSuratKeluarController');
 
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');

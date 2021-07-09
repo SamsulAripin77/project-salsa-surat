@@ -2,33 +2,27 @@
 @section('content')
 <div style="margin-bottom: 10px;" class="row">
     <div class="col-lg-12">
-        @if ($label == 'Surat Masuk')
-        <a class="btn btn-success" href="{{ route('admin.suratmasuks.create') }}">
-            Input Surat
-        </a>
-        @else
-        <a class="btn btn-success" href="{{ route('admin.suratkeluars.create') }}">
-            Input Surat
-        </a>
-        @endif
     </div>
 </div>
 <div class="card"></div>        
     <div class="card-header">
-        Daftar {{$label}}
+        Pengarahan {{$label}}
     </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover datatable datatable-surat-masuk">
                 <thead>
                     <tr>
-                    <th>No</th>
-                        <th>Tanggal Input</th>
-                        <th>Tanggal Surat</th>
+                        <th>No</th>
                         <th>No Surat</th>
                         @if ($label == 'Surat Masuk')
                             <th>Pengirim</th>
+                        @else 
+                            <th>Penanggung Jawab</th>
                         @endif
+                        <th>Penerima</th>
+                        <th>Alamat</th>
+                        <th>keterangan</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -39,13 +33,17 @@
                         <td>
                             {{$surats->firstItem() + $key}}
                         </td>
-                        <td>{{$item->updated_at->diffForHumans() ?? ''}}</td>
-                        <td>{{$item->tgl_surat ?? ''}}</td> 
                         <td>{{$item->no_surat ?? ''}}</td>
                         @if ($label == 'Surat Masuk')
-                             <td>{{$item->pengirim ?? ''}}</td>
+                            <th>{{$item->pengirim ?? ''}}</th>
+                        @else
+                            <th>{{$item->penanggug_jawab ?? ''}}</th>
                         @endif
-                        
+                        <td>{{$item->penerima ?? ''}}</td>
+                        <td>{{$item->alamat ?? ''}}</td>
+                        <td>
+                            {{$item->keterangan}}
+                        </td>
                         <td>
                             @if ($item->status == 'pending')
                                 <span class="badge badge-warning">{{$item->status ?? ''}}</span>
@@ -58,33 +56,25 @@
                             @endif
                         </td>
                         <td>
+                   
                             @if ($label == 'Surat Masuk')
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.suratmasuks.show', $item) }}">
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.pengarahansuratmasuks.show', $item) }}">
                                     {{ trans('global.view') }}
                                 </a>
                             @else
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.suratkeluars.show', $item) }}">
+                                <a class="btn btn-xs btn-primary" href="{{ route('admin.pengarahansuratkeluars.show', $item) }}">
                                     {{ trans('global.view') }}
                                 </a>
                             @endif
                                 @if ($label == 'Surat Masuk')
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.suratmasuks.edit', $item->id) }}">
+                                <a class="btn btn-xs btn-info" href="{{ route('admin.pengarahansuratmasuks.edit', $item->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @else
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.suratkeluars.edit', $item->id) }}">
+                                <a class="btn btn-xs btn-info" href="{{ route('admin.pengarahansuratkeluars.edit', $item->id) }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endif
-                            @if ($label == 'Surat Masuk')
-                            <form action="{{ route('admin.suratmasuks.destroy', $item->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                            @else
-                            <form action="{{ route('admin.suratkeluars.destroy', $item->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                            @endif
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                </form>
                         </td>
                     </tr>
                     @endforeach

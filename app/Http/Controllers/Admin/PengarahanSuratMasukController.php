@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\{SuratMasuk,Kategori};
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -9,7 +8,7 @@ use Illuminate\Http\Request;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class SuratMasukController extends Controller
+class PengarahanSuratMasukController extends Controller
 {
     private $label = 'Surat Masuk';
     /**
@@ -19,9 +18,9 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('surat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('pengarahan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surats = SuratMasuk::simplePaginate(5);
-        return view('admin.surats.index', ['surats' => $surats, 'label'=> $this->label]);
+        return view('admin.pengarahans.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
     /**
@@ -31,9 +30,9 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        abort_if(Gate::denies('surat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('pengarahan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih Kode','');
-        return view('admin.surats.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
+        return view('admin.pengarahans.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
     }
 
     /**
@@ -55,7 +54,7 @@ class SuratMasukController extends Controller
                             'hal' => $request->get('hal'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()]);
-        return redirect()->route('admin.suratmasuks.index')->with('message','Input Berhasil');
+        return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Input Berhasil');
     }
 
     /**
@@ -66,9 +65,9 @@ class SuratMasukController extends Controller
      */
     public function show(SuratMasuk $suratMasuk, $id)
     {
-        abort_if(Gate::denies('surat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('pengarahan_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surat = SuratMasuk::find($id);
-        return view('admin.surats.show',['surat' => $surat,'label'=>$this->label]);
+        return view('admin.pengarahans.show',['surat' => $surat,'label'=>$this->label]);
     }
 
     /**
@@ -79,10 +78,10 @@ class SuratMasukController extends Controller
      */
     public function edit(SuratMasuk $suratMasuk, $id)
     {
-        abort_if(Gate::denies('surat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('pengarahan_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surat = SuratMasuk::findOrFail($id);
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
-        return view('admin.surats.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label]);
+        return view('admin.pengarahans.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label]);
     }
 
     /**
@@ -95,25 +94,24 @@ class SuratMasukController extends Controller
     public function update(Request $request, SuratMasuk $suratMasuk, $id)
     {   
         $surat = SuratMasuk::find($id);
-        if($request->hasFile('lampiran')){
-            $path = $request->file('lampiran')->store('public/lampiran');
-            $lampiran = $path;
+
+        if ($request->get('penerima')){
+            $surat->update([
+                'penerima' => $request->get('penerima'),
+                'alamat' => $request->get('alamat'),
+                'user_id' => Auth::id()
+            ]);
         }else {
-            $lampiran = $surat->lampiran;
+            $surat->update([
+                'keterangan' => $request->get('keterangan'),
+                'status' => $request->get('status'),
+                'user_id' => Auth::id()
+            ]);
         }
 
+     
 
-        $surat->update([
-                            'lampiran'=> $lampiran,
-                            'tgl_surat' => $request->get('tgl_surat'),
-                            'no_surat' => $request->get('no_surat'),
-                            'pengirim' => $request->get('pengirim'),
-                            'hal' => $request->get('hal'),
-                            'kategori_id' => $request->get('kategori_id'),
-                            'user_id' => Auth::id()
-        ]);
-
-        return redirect()->route('admin.suratmasuks.index')->with('message','Update Berhasil');
+        return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Update Berhasil');
     }
 
     /**
@@ -124,7 +122,7 @@ class SuratMasukController extends Controller
      */
     public function destroy(SuratMasuk $suratMasuk, $id)
     {
-       abort_if(Gate::denies('surat_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+       abort_if(Gate::denies('pengarahan_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
        $surat = SuratMasuk::findOrFail($id);
        $surat->delete();
 

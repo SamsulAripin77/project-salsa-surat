@@ -77,7 +77,7 @@
                 </ul>
             </li>
         @endcan
-        @can('laporan_access')
+        @can('surat_access')
         <li class="c-sidebar-nav-dropdown {{ request()->is("admin/suratmasuks*") ? "c-show" : "" }} {{ request()->is("admin/suratkeluars*") ? "c-show" : "" }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-sticky-note c-sidebar-nav-icon">
@@ -96,6 +96,34 @@
                 </li>
                 <li class="c-sidebar-nav-item">
                     <a href="{{route('admin.suratkeluars.index')}}" class="c-sidebar-nav-link {{request()->is("admin/suratkeluars") || request()->is("admin/suratkeluars/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Keluar
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endcan
+        @can('pengarahan_access')
+        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/pengarahansuratmasuks*") ? "c-show" : "" }} {{ request()->is("admin/pengarahansuratkeluars*") ? "c-show" : "" }}">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="fa-fw fas fa-book c-sidebar-nav-icon">
+
+                </i>
+               Pengarahan Surat
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a href="{{route('admin.pengarahansuratmasuks.index')}}" class="c-sidebar-nav-link {{request()->is("admin/pengarahansuratmasuks") || request()->is("admin/pengarahansuratmasuks/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file-alt c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Masuk
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a href="{{route('admin.pengarahansuratkeluars.index')}}" class="c-sidebar-nav-link {{request()->is("admin/pengarahansuratkeluars") || request()->is("admin/pengarahansuratkeluars/*") ? "c-active": ""}}">
                         <i class="fa-fw fas fa-file c-sidebar-nav-icon">
 
                         </i>

@@ -6,6 +6,8 @@ use App\{SuratKeluar,kategori};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class SuratKeluarController extends Controller
 {
@@ -17,6 +19,7 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('surat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surats = SuratKeluar::simplePaginate(5);
         return view('admin.surats.index', ['surats' => $surats, 'label'=> $this->label]);
     }
@@ -28,6 +31,7 @@ class SuratKeluarController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('surat_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
         return view('admin.surats.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
     }
@@ -61,6 +65,7 @@ class SuratKeluarController extends Controller
      */
     public function show(SuratKeluar $SuratKeluar, $id)
     {
+        abort_if(Gate::denies('surat_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surat = SuratKeluar::find($id);
         return view('admin.surats.show',['surat' => $surat,'label'=>$this->label]);
     }
@@ -73,6 +78,7 @@ class SuratKeluarController extends Controller
      */
     public function edit(SuratKeluar $SuratKeluar, $id)
     {
+        abort_if(Gate::denies('surat_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surat = SuratKeluar::findOrFail($id);
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
         return view('admin.surats.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label]);
@@ -116,6 +122,7 @@ class SuratKeluarController extends Controller
      */
     public function destroy(SuratKeluar $SuratKeluar, $id)
     {
+       abort_if(Gate::denies('surat_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
        $surat = SuratKeluar::findOrFail($id);
        $surat->delete();
 
