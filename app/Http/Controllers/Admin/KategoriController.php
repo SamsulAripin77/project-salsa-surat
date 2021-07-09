@@ -45,16 +45,6 @@ class KategoriController extends Controller
         return redirect()->route('admin.kategoris.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Kategori  $kategori
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kategori $kategori)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,7 +78,6 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        return $kategori;
         $kategori->delete();
         return back();
     }

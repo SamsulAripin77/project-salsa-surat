@@ -14,10 +14,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('roles', 'RolesController');
 
     //surat masuks
-    Route::get('suratmasuks/laporan','SuratMasukController@laporan')->name('suratmasuks-laporan');
+    Route::get('surat-masuks/laporan','SuratMasukController@laporan')->name('suratmasuks-laporan');
     Route::resource('suratmasuks','SuratMasukController');
 
     //surat keluar
+    Route::get('surat-keluars/laporan','SuratKeluarController@laporan')->name('suratkeluars-laporan');
     Route::resource('suratkeluars','SuratKeluarController');
 
     //pengarahan surat masuks

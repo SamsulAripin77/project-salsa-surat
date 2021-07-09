@@ -133,6 +133,44 @@
             </ul>
         </li>
         @endcan
+        @can('surat_laporan')
+        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/surat-masuks/laporan*") ? "c-show" : "" }} {{ request()->is("admin/surat-keluars/laporan*") ? "c-show" : "" }}">
+            <a class="c-sidebar-nav-dropdown-toggle" href="#">
+                <i class="fa-fw fas fa-book c-sidebar-nav-icon">
+
+                </i>
+               Laporan Surat
+            </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a href="{{route('admin.suratmasuks-laporan')}}" class="c-sidebar-nav-link {{request()->is("admin/surat-masuks/laporan") || request()->is("admin/surat-masuks/laporan/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file-alt c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Masuk
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a href="{{route('admin.suratkeluars-laporan')}}" class="c-sidebar-nav-link {{request()->is("admin/surat-keluars/laporan") || request()->is("admin/surat-keluars/laporan/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Keluar
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endcan
+        @can('kode_surat_access')
+        <li class="c-sidebar-nav-item">
+            <a href="{{route('admin.kategoris.index')}}" class="c-sidebar-nav-link">
+                <i class="c-sidebar-nav-icon fas fa-fw fa-pen">
+                    
+                </i>
+                Kode Surat
+            </a>
+        </li>
+        @endcan
         <li class="c-sidebar-nav-item">
             <a href="#" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                 <i class="c-sidebar-nav-icon fas fa-fw fa-sign-out-alt">
