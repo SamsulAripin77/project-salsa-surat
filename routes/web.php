@@ -14,15 +14,16 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('roles', 'RolesController');
 
     //surat masuks
+    Route::get('suratmasuks/laporan','SuratMasukController@laporan')->name('suratmasuks-laporan');
     Route::resource('suratmasuks','SuratMasukController');
 
-    //surat masuks
+    //surat keluar
     Route::resource('suratkeluars','SuratKeluarController');
 
     //pengarahan surat masuks
     Route::resource('pengarahansuratmasuks','PengarahanSuratMasukController');
 
-     //pengarahan surat masuks
+     //pengarahan surat keluar
      Route::resource('pengarahansuratkeluars','PengarahanSuratKeluarController');
 
     // Users

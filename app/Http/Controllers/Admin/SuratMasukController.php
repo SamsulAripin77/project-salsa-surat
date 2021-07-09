@@ -130,4 +130,9 @@ class SuratMasukController extends Controller
 
        return back();
     }
+
+    public function laporan () {
+        $surats = SuratMasuk::all();
+        return view('admin.laporan.laporan', ['surats' => $surats, 'label'=> $this->label]);
+    }
 }
