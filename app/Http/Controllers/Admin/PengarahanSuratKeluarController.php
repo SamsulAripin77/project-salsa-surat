@@ -24,39 +24,7 @@ class PengarahanSuratKeluarController extends Controller
         return view('admin.pengarahans.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih Kode','');
-        return view('admin.pengarahans.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            
-        ]);
-        $path = $request->file('lampiran')->store('public/lampiran');
-        SuratKeluar::create(['lampiran'=> $path,
-                            'tgl_surat' => $request->get('tgl_surat'),
-                            'no_surat' => $request->get('no_surat'),
-                            'pengirim' => $request->get('pengirim'),
-                            'hal' => $request->get('hal'),
-                            'kategori_id' => $request->get('kategori_id'),
-                            'user_id' => Auth::id()]);
-        return redirect()->route('admin.pengarahansuratkeluars.index')->with('message','Input Berhasil');
-    }
-
+   
     /**
      * Display the specified resource.
      *
@@ -98,13 +66,13 @@ class PengarahanSuratKeluarController extends Controller
         if ($request->get('penerima')){
             $surat->update([
                 'penerima' => $request->get('penerima'),
+                'penanggug_jawab' => $request->get('penanggung_jawab'),
                 'alamat' => $request->get('alamat'),
                 'user_id' => Auth::id()
             ]);
         }else {
             $surat->update([
                 'keterangan' => $request->get('keterangan'),
-                'penanggug_jawab' => $request->get('penangungjawab'),
                 'status' => $request->get('status'),
                 'user_id' => Auth::id()
             ]);

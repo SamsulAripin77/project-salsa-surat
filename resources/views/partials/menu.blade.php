@@ -54,26 +54,7 @@
                             </a>
                         </li>
                     @endcan
-                    @can('audit_log_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.audit-logs.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/audit-logs") || request()->is("admin/audit-logs/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-file-alt c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.auditLog.title') }}
-                            </a>
-                        </li>
-                    @endcan
-                    @can('user_alert_access')
-                        <li class="c-sidebar-nav-item">
-                            <a href="{{ route("admin.user-alerts.index") }}" class="c-sidebar-nav-link {{ request()->is("admin/user-alerts") || request()->is("admin/user-alerts/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-bell c-sidebar-nav-icon">
-
-                                </i>
-                                {{ trans('cruds.userAlert.title') }}
-                            </a>
-                        </li>
-                    @endcan
+                 
                 </ul>
             </li>
         @endcan
