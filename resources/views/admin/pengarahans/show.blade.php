@@ -28,7 +28,7 @@
                     </tr>
                     <tr>
                         <th>Kode Surat</th>
-                        <th>{{$surat->kategoris->nama}}</th>
+                        <th>{{$surat->kategoris->nama ?? ''}}</th>
                     </tr>
                     @if ($label == 'Surat Masuk')
                     <tr>

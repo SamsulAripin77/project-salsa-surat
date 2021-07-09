@@ -24,40 +24,6 @@ class PengarahanSuratMasukController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        abort_if(Gate::denies('pengarahan_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih Kode','');
-        return view('admin.pengarahans.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            
-        ]);
-        $path = $request->file('lampiran')->store('public/lampiran');
-        SuratMasuk::create(['lampiran'=> $path,
-                            'tgl_surat' => $request->get('tgl_surat'),
-                            'no_surat' => $request->get('no_surat'),
-                            'pengirim' => $request->get('pengirim'),
-                            'hal' => $request->get('hal'),
-                            'kategori_id' => $request->get('kategori_id'),
-                            'user_id' => Auth::id()]);
-        return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Input Berhasil');
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\SuratMasuk  $suratMasuk
@@ -114,18 +80,5 @@ class PengarahanSuratMasukController extends Controller
         return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Update Berhasil');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\SuratMasuk  $suratMasuk
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SuratMasuk $suratMasuk, $id)
-    {
-       abort_if(Gate::denies('pengarahan_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-       $surat = SuratMasuk::findOrFail($id);
-       $surat->delete();
 
-       return back();
-    }
 }

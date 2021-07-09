@@ -19,18 +19,18 @@
                     <label class="required" for="pengirim">Alamat</label>
                     <input name="alamat" type="text" class="form-control" placeholder="Alamat" required>
                 </div>
-                @endcan
-                @can('pengarahan_edit_petugas_arsip')
-                <div class="form-group">
-                    <label class="required" for="hal">Keterangan</label>
-                    <input name="keterangan" type="text" class="form-control" placeholder="keterangan" required>
-                </div>
                 @if ($label == 'Surat Keluar')
                 <div class="form-group">
                     <label class="required" for="hal">Penanggung Jawab</label>
                     <input name="penanggung_jawab" type="text" class="form-control" placeholder="penanggung_jawab" required>
                 </div> 
                 @endif
+                @endcan
+                @can('pengarahan_edit_petugas_arsip')
+                <div class="form-group">
+                    <label class="required" for="hal">Keterangan</label>
+                    <input name="keterangan" type="text" class="form-control" placeholder="keterangan" required>
+                </div>
                 <div class="form-group">
                     <label class="required" for="status">Status</label>
                     <select name="status" id="kategori" class="form-control" required>
