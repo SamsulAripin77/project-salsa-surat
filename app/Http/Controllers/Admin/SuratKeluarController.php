@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\{SuratMasuk,Kategori};
-use Illuminate\Support\Facades\Auth;
+use App\{SuratKeluar,kategori};
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class SuratMasukController extends Controller
+class SuratKeluarController extends Controller
 {
-    private $label = 'Surat Masuk';
+    private $label = 'Surat Keluar';
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +17,7 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $surats = SuratMasuk::simplePaginate(5);
+        $surats = SuratKeluar::simplePaginate(5);
         return view('admin.surats.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
@@ -28,7 +28,7 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih Kode','');
+        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
         return view('admin.surats.create',['kategoris'=>$kategoris, 'label'=> $this->label]);
     }
 
@@ -44,37 +44,36 @@ class SuratMasukController extends Controller
             
         ]);
         $path = $request->file('lampiran')->store('public/lampiran');
-        SuratMasuk::create(['lampiran'=> $path,
+        SuratKeluar::create(['lampiran'=> $path,
                             'tgl_surat' => $request->get('tgl_surat'),
                             'no_surat' => $request->get('no_surat'),
-                            'pengirim' => $request->get('pengirim'),
                             'hal' => $request->get('hal'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()]);
-        return redirect()->route('admin.suratmasuks.index')->with('message','Input Berhasil');
+        return redirect()->route('admin.suratkeluars.index')->with('message','Input Berhasil');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\SuratMasuk  $suratMasuk
+     * @param  \App\SuratKeluar  $SuratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function show(SuratMasuk $suratMasuk, $id)
+    public function show(SuratKeluar $SuratKeluar, $id)
     {
-        $surat = SuratMasuk::find($id);
+        $surat = SuratKeluar::find($id);
         return view('admin.surats.show',['surat' => $surat,'label'=>$this->label]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SuratMasuk  $suratMasuk
+     * @param  \App\SuratKeluar  $SuratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function edit(SuratMasuk $suratMasuk, $id)
+    public function edit(SuratKeluar $SuratKeluar, $id)
     {
-        $surat = SuratMasuk::findOrFail($id);
+        $surat = SuratKeluar::findOrFail($id);
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
         return view('admin.surats.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label]);
     }
@@ -83,12 +82,12 @@ class SuratMasukController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SuratMasuk  $suratMasuk
+     * @param  \App\SuratKeluar  $SuratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SuratMasuk $suratMasuk, $id)
+    public function update(Request $request, SuratKeluar $SuratKeluar, $id)
     {   
-        $surat = SuratMasuk::find($id);
+        $surat = SuratKeluar::find($id);
         if($request->hasFile('lampiran')){
             $path = $request->file('lampiran')->store('public/lampiran');
             $lampiran = $path;
@@ -101,24 +100,23 @@ class SuratMasukController extends Controller
                             'lampiran'=> $lampiran,
                             'tgl_surat' => $request->get('tgl_surat'),
                             'no_surat' => $request->get('no_surat'),
-                            'pengirim' => $request->get('pengirim'),
                             'hal' => $request->get('hal'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()
         ]);
 
-        return redirect()->route('admin.suratmasuks.index')->with('message','Update Berhasil');
+        return redirect()->route('admin.suratkeluars.index')->with('message','Update Berhasil');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SuratMasuk  $suratMasuk
+     * @param  \App\SuratKeluar  $SuratKeluar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuratMasuk $suratMasuk, $id)
+    public function destroy(SuratKeluar $SuratKeluar, $id)
     {
-       $surat = SuratMasuk::findOrFail($id);
+       $surat = SuratKeluar::findOrFail($id);
        $surat->delete();
 
        return back();

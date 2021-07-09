@@ -3,7 +3,11 @@
     <div class="card">
         <div class="card-header">Input Surat</div>
         <div class="card-body">
+            @if ($label == 'Surat Masuk')
             <form action="{{route('admin.suratmasuks.store')}}" method="POST" enctype="multipart/form-data">
+            @else 
+            <form action="{{route('admin.suratkeluars.store')}}" method="POST" enctype="multipart/form-data">
+            @endif
                 @csrf
                 <div class="form-group">
                     <label for="tgl_surat" class="required">Tanggal Surat</label>
@@ -13,10 +17,12 @@
                     <label class="required" for="pengirim">No Surat</label>
                     <input name="no_surat" type="text" class="form-control" placeholder="Nonor Surat" required>
                 </div>
+                @if ($label == 'Surat Masuk')
                 <div class="form-group">
                     <label class="required" for="pengirim">pengirim</label>
                     <input name="pengirim" type="text" class="form-control" placeholder="pengirim" required>
                 </div>
+                @endif
                 <div class="form-group">
                     <label class="required" for="hal">Perihal</label>
                     <input name="hal" type="text" class="form-control" placeholder="hal" required>

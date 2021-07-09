@@ -78,7 +78,7 @@
             </li>
         @endcan
         @can('laporan_access')
-        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/suratmasuks*") ? "c-show" : "" }}">
+        <li class="c-sidebar-nav-dropdown {{ request()->is("admin/suratmasuks*") ? "c-show" : "" }} {{ request()->is("admin/suratkeluars*") ? "c-show" : "" }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-sticky-note c-sidebar-nav-icon">
 
@@ -87,7 +87,20 @@
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
-                    <a href="{{route('admin.suratmasuks.index')}}" class="c-sidebar-nav-link {{request()->is("admin/suratmasuks") || request()->is("admin/suratmasuks/*") ? "c-active": ""}}">Surat Masuk</a>
+                    <a href="{{route('admin.suratmasuks.index')}}" class="c-sidebar-nav-link {{request()->is("admin/suratmasuks") || request()->is("admin/suratmasuks/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file-alt c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Masuk
+                    </a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a href="{{route('admin.suratkeluars.index')}}" class="c-sidebar-nav-link {{request()->is("admin/suratkeluars") || request()->is("admin/suratkeluars/*") ? "c-active": ""}}">
+                        <i class="fa-fw fas fa-file c-sidebar-nav-icon">
+
+                        </i>
+                        Surat Keluar
+                    </a>
                 </li>
             </ul>
         </li>

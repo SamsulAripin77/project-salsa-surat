@@ -16,6 +16,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //surat masuks
     Route::resource('suratmasuks','SuratMasukController');
 
+    //surat masuks
+    Route::resource('suratkeluars','SuratKeluarController');
+
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::post('users/media', 'UsersController@storeMedia')->name('users.storeMedia');

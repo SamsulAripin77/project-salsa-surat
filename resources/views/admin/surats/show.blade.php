@@ -26,10 +26,18 @@
                         <th>Kode Surat</th>
                         <th>{{$surat->kategoris->nama}}</th>
                     </tr>
+                    @if ($label == 'Surat Masuk')
                     <tr>
                         <th>Pengirim</th>
                         <th>{{$surat->pengirim ?? ''}}</th>
                     </tr>
+                    @else 
+                    <tr>
+                        <th>Penanggung Jawab</th>
+                        <th>{{$surat->penanggug_jawab ?? ''}}</th>
+                    </tr>
+                    @endif
+                  
                     <tr>
                         <th>Penerima</th>
                         <th>{{$surat->penerima ?? ''}}</th>
