@@ -22,16 +22,12 @@
                     <input name="hal" type="text" class="form-control" placeholder="hal" required>
                 </div>
                 <div class="form-group">
-                    <label class="required" for="kategori_id">kategori</label>
+                    <label class="required" for="kategori_id">Kode Surat</label>
                     <select name="kategori_id" id="kategori" class="form-control" required>
                         @foreach ($kategoris as $id => $item)
                             <option value="{{ $id }}">{{$item}}</option>
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="required" for="alamat">alamat</label>
-                    <input name="alamat" type="text" class="form-control" placeholder="alamat">
                 </div>
                 <div class="form-group">
                     <label class="required" for="pengirim">lampiran</label>

@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card">
-        <div class="card-header">Edit Kategori</div>
+        <div class="card-header">Edit Kode</div>
         <div class="card-body">
             <form action="{{route('admin.kategoris.update',[$kategori->id])}}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                    <label for="judul" class="required">Nama</label>
+                    <label for="judul" class="required">Kode</label>
                     <input name="nama" type="text" class="form-control" placeholder="Nama Kategori" value="{{old('nama', $kategori->nama)}}" required>
                 </div>
                 <div class="form-group">

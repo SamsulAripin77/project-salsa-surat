@@ -88,7 +88,7 @@ class KategoriController extends Controller
      */
     public function destroy(Kategori $kategori)
     {
-        //
+        return $kategori;
         $kategori->delete();
         return back();
     }

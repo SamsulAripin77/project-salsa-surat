@@ -49,9 +49,8 @@ class SuratMasukController extends Controller
                             'pengirim' => $request->get('pengirim'),
                             'hal' => $request->get('hal'),
                             'kategori_id' => $request->get('kategori_id'),
-                            'alamat' => $request->get('alamat'),
                             'user_id' => Auth::id()]);
-        return redirect()->route('admin.suratmasuks.index');
+        return redirect()->route('admin.suratmasuks.index')->with('message','Input Berhasil');
     }
 
     /**
@@ -60,9 +59,10 @@ class SuratMasukController extends Controller
      * @param  \App\SuratMasuk  $suratMasuk
      * @return \Illuminate\Http\Response
      */
-    public function show(SuratMasuk $suratMasuk)
+    public function show(SuratMasuk $suratMasuk, $id)
     {
-        //
+        $surat = SuratMasuk::find($id);
+        return view('admin.surats.show',compact('surat'));
     }
 
     /**
@@ -71,9 +71,11 @@ class SuratMasukController extends Controller
      * @param  \App\SuratMasuk  $suratMasuk
      * @return \Illuminate\Http\Response
      */
-    public function edit(SuratMasuk $suratMasuk)
+    public function edit(SuratMasuk $suratMasuk, $id)
     {
-        //
+        $surat = SuratMasuk::findOrFail($id);
+        $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
+        return view('admin.surats.edit',compact('surat','kategoris'));
     }
 
     /**
@@ -83,9 +85,28 @@ class SuratMasukController extends Controller
      * @param  \App\SuratMasuk  $suratMasuk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SuratMasuk $suratMasuk)
-    {
-        //
+    public function update(Request $request, SuratMasuk $suratMasuk, $id)
+    {   
+        $surat = SuratMasuk::find($id);
+        if($request->hasFile('lampiran')){
+            $path = $request->file('lampiran')->store('public/lampiran');
+            $lampiran = $path;
+        }else {
+            $lampiran = $surat->lampiran;
+        }
+
+
+        $surat->update([
+                            'lampiran'=> $lampiran,
+                            'tgl_surat' => $request->get('tgl_surat'),
+                            'no_surat' => $request->get('no_surat'),
+                            'pengirim' => $request->get('pengirim'),
+                            'hal' => $request->get('hal'),
+                            'kategori_id' => $request->get('kategori_id'),
+                            'user_id' => Auth::id()
+        ]);
+
+        return redirect()->route('admin.suratmasuks.index')->with('message','Update Berhasil');
     }
 
     /**
@@ -94,9 +115,11 @@ class SuratMasukController extends Controller
      * @param  \App\SuratMasuk  $suratMasuk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuratMasuk $suratMasuk)
+    public function destroy(SuratMasuk $suratMasuk, $id)
     {
-        $suratMasuk->delete();
-        return back();
+       $surat = SuratMasuk::findOrFail($id);
+       $surat->delete();
+
+       return back();
     }
 }

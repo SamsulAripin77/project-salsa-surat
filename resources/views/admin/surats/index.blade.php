@@ -17,6 +17,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Tanggal Input</th>
                         <th>Tanggal Surat</th>
                         <th>No Surat</th>
                         <th>Pengirim</th>
@@ -30,11 +31,17 @@
                         <td>
                             {{$surats->firstItem() + $key}}
                         </td>
-                        <td>{{$item->tgl_surat}}</td>
+                        <td>{{$item->updated_at->diffForHumans() ?? ''}}</td>
+                        <td>{{$item->tgl_surat}}</td> 
                         <td>{{$item->no_surat}}</td>
                         <td>{{$item->pengirim}}</td>
                         <td>{{$item->status}}</td>
                         <td>
+                            @can('keterangan_show')
+                            <a class="btn btn-xs btn-primary" href="{{ route('admin.suratmasuks.show', $item) }}">
+                                {{ trans('global.view') }}
+                            </a>
+                             @endcan
                             @can('keterangan_edit')
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.suratmasuks.edit', $item->id) }}">
                                     {{ trans('global.edit') }}

@@ -9,10 +9,10 @@ class SuratMasuk extends Model
     protected $guarded = [];
 
     public function kategoris(){
-        return $this->hasMany(Kategori::class);
+        return $this->belongsTo('App\Kategori','user_id');
     }
 
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\Models\User','user_id');
     }
 }

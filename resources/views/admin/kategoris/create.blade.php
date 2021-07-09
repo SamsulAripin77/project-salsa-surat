@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card">
-        <div class="card-header">Buat Kategori</div>
+        <div class="card-header">Buat Kode</div>
         <div class="card-body">
             <form action="{{route('admin.kategoris.store')}}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="judul" class="required">Nama</label>
+                    <label for="judul" class="required">Kode</label>
                     <input name="nama" type="text" class="form-control" placeholder="Nama Kategori" required>
                 </div>
                 <div class="form-group">

@@ -9,7 +9,7 @@
 </div>
 <div class="card"></div>        
     <div class="card-header">
-        Daftar kategori
+        Daftar Kode
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -17,7 +17,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
+                        <th>Kode</th>
                         <th>keterangan</th>
                         <th>Action</th>
                     </tr>
