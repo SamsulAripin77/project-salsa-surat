@@ -1,12 +1,21 @@
 <?php
 
-use App\Models\User;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class RoleUserTableSeeder extends Seeder
+class CustomizedRoleUserTableSeeder extends Seeder
 {
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
     public function run()
     {
+        
+
         \DB::table('role_user')->delete();
         
         \DB::table('role_user')->insert(array (
@@ -26,6 +35,7 @@ class RoleUserTableSeeder extends Seeder
                 'role_id' => 3,
             ),
         ));
+        
         
     }
 }

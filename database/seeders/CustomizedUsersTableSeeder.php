@@ -1,13 +1,21 @@
 <?php
 
-use App\Models\User;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class CustomizedUsersTableSeeder extends Seeder
 {
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
     public function run()
     {
         
+
         \DB::table('users')->delete();
         
         \DB::table('users')->insert(array (
@@ -69,5 +77,7 @@ class UsersTableSeeder extends Seeder
                 'status' => 'aktif',
             ),
         ));
+        
+        
     }
 }

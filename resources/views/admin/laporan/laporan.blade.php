@@ -103,6 +103,8 @@
 @parent
 <script>
 $(function () {
+    let label = {!! json_encode($label) !!};
+    console.log(label);
     $('#example tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
@@ -124,7 +126,8 @@ $(function () {
         },
     dom: 'Bfrtip',
     buttons: [
-        'excel', 'pdf'
+        {extend: 'pdf', title: 'laporan ' + label},
+        'excel',
     ]  })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()

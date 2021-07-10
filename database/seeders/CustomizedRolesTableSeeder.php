@@ -1,13 +1,20 @@
 <?php
 
-use App\Models\Role;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class RolesTableSeeder extends Seeder
+class CustomizedRolesTableSeeder extends Seeder
 {
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
     public function run()
     {
-           
+        
 
         \DB::table('roles')->delete();
         
@@ -37,6 +44,7 @@ class RolesTableSeeder extends Seeder
                 'deleted_at' => NULL,
             ),
         ));
+        
         
     }
 }

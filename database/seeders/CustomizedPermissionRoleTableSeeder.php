@@ -1,13 +1,21 @@
 <?php
 
-use App\Models\Permission;
-use App\Models\Role;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
-class PermissionRoleTableSeeder extends Seeder
+class CustomizedPermissionRoleTableSeeder extends Seeder
 {
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
     public function run()
     {
+        
+
         \DB::table('permission_role')->delete();
         
         \DB::table('permission_role')->insert(array (
@@ -217,5 +225,7 @@ class PermissionRoleTableSeeder extends Seeder
                 'permission_id' => 114,
             ),
         ));
+        
+        
     }
 }
