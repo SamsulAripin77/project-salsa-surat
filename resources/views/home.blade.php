@@ -26,9 +26,44 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="myChart" width="400" height="150"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('scripts')
 @parent
-
+<script>
+    let masukCount = {!! json_encode($masukCount) !!};
+    let keluarCount = {!! json_encode($keluarCount) !!};
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Surat Masuk','Surat Keluar'],
+            datasets: [{
+                label: 'Grafik Surat',
+                data: [masukCount, keluarCount],
+                backgroundColor: [
+                    '#e74c3c',
+                    '#3498db',
+                ],
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: Math.max(masukCount,keluarCount) + 5,
+                }
+            }
+        }
+    });
+    </script>
 @endsection
