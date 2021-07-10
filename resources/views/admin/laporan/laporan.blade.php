@@ -28,7 +28,7 @@
                         @endif
                         <th>Hal</th>
                         <th>Kode Surat</th>
-                        <th>Alamat</th>
+                        <th>Bidang</th>
                         <th>Keterangan</th>
                         <th>Status</th>
                     </tr>
@@ -47,10 +47,10 @@
                         <td>{{$item->no_surat ?? ''}}</td>
                         @if ($label == 'Surat Masuk')
                              <td>{{$item->pengirim ?? ''}}</td>
+                             <td>{{$item->penerima ?? ''}}</td>
                         @else 
                              <td>{{$item->penanggung_jawab ?? ''}}</td>
                         @endif
-                        <td>{{$item->penerima ?? ''}}</td>
                         <td>{{$item->hal ?? ''}}</td>
                         <td>{{$item->kategoris->nama ?? ''}}</td>
                         <td>{{$item->bidang ?? ''}}</td>
