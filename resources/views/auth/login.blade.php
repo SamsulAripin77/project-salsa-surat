@@ -1,12 +1,17 @@
 @extends('layouts.app')
 @section('content')
+<div class="row p-3 mb-5">
+    <div class="col-lg-12 col-md-12">
+        <h3 class="text-center">Sistem Informasi Pengelolaan Surat </h3>
+        <h3 class="text-center">Dinas Perhubungan Kabupaten Sukabumi</h3>
+    </div>
+</div>
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
-                <h1>Login</h1>
-                <p class="text-muted">{{ trans('global.login') }}</p>
-
+                <h2 class="">Login</h2>
+                <br>
                 @if(session('message'))
                     <div class="alert alert-info" role="alert">
                         {{ session('message') }}
