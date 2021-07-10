@@ -20,7 +20,7 @@
                     </tr>
                     <tr>
                         <th>Tanggal Input</th>
-                        <th>{{$surat->updated_at->diffForHumans() ?? ''}}</th>
+                        <th>{{$surat->updated_at->format('d/m/Y') ?? ''}}</th>
                     </tr>
                     <tr>
                         <th>Nomor Surat</th>
@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <th>Alamat</th>
-                        <th>{{$surat->alamat ?? ''}}</th>
+                        <th>{{$surat->bidang ?? ''}}</th>
                     </tr>
                     <tr>
                         <th>Keterangan</th>

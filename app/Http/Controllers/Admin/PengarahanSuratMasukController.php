@@ -64,7 +64,7 @@ class PengarahanSuratMasukController extends Controller
         if ($request->get('penerima')){
             $surat->update([
                 'penerima' => $request->get('penerima'),
-                'alamat' => $request->get('alamat'),
+                'bidang' => $request->get('bidang'),
                 'user_id' => Auth::id()
             ]);
         }else {

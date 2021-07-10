@@ -63,11 +63,10 @@ class PengarahanSuratKeluarController extends Controller
     {   
         $surat = Suratkeluar::find($id);
 
-        if ($request->get('penerima')){
+        if ($request->get('penanggung_jawab')){
             $surat->update([
-                'penerima' => $request->get('penerima'),
-                'penanggug_jawab' => $request->get('penanggung_jawab'),
-                'alamat' => $request->get('alamat'),
+                'penanggung_jawab' => $request->get('penanggung_jawab'),
+                'bidang' => $request->get('bidang'),
                 'user_id' => Auth::id()
             ]);
         }else {

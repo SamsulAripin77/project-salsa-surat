@@ -39,7 +39,7 @@
                         <td>
                             {{$surats->firstItem() + $key}}
                         </td>
-                        <td>{{$item->updated_at->diffForHumans() ?? ''}}</td>
+                        <td>{{$item->updated_at->format('d/m/Y') ?? ''}}</td>
                         <td>{{$item->tgl_surat ?? ''}}</td> 
                         <td>{{$item->no_surat ?? ''}}</td>
                         @if ($label == 'Surat Masuk')

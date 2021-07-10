@@ -17,12 +17,12 @@ class CreateSuratKeluarsTable extends Migration
             $table->id();
             $table->string('tgl_surat')->nullable();
             $table->string('no_surat')->nullable();
-            $table->string('penanggug_jawab')->nullable();
+            $table->string('penanggung_jawab')->nullable();
             $table->string('penerima')->nullable();
             $table->string('lampiran')->nullable();
             $table->string('hal')->nullable();
             $table->unsignedBigInteger('kategori_id');
-            $table->string('alamat')->nullable();
+            $table->string('bidang')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable()->default('pending');
             $table->unsignedBigInteger('user_id');

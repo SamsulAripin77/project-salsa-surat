@@ -1,7 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card">
-        <div class="card-header">Input Surat</div>
+        <div class="card-header">
+            @can('pengarahan_edit_sekertaris')
+                Input Pengarahan Surat 
+            @endcan
+            @can('pengarahan_edit_petugas_arsip')
+                Input Status Surat
+            @endcan
+        </div>
         <div class="card-body">
             @if ($label == 'Surat Masuk')
             <form action="{{route('admin.pengarahansuratmasuks.update', [$surat->id])}}" method="POST" enctype="multipart/form-data">
@@ -11,20 +18,21 @@
                 @csrf
                 @method('PUT')
                 @can('pengarahan_edit_sekertaris')
-                <div class="form-group">
-                    <label class="required" for="pengirim">Penerima</label>
-                    <input name="penerima" type="text" class="form-control" placeholder="Penerima" required>
-                </div>
-                <div class="form-group">
-                    <label class="required" for="pengirim">Alamat</label>
-                    <input name="alamat" type="text" class="form-control" placeholder="Alamat" required>
-                </div>
                 @if ($label == 'Surat Keluar')
                 <div class="form-group">
                     <label class="required" for="hal">Penanggung Jawab</label>
                     <input name="penanggung_jawab" type="text" class="form-control" placeholder="penanggung_jawab" required>
                 </div> 
+                @else 
+                <div class="form-group">
+                    <label class="required" for="pengirim">Penerima</label>
+                    <input name="penerima" type="text" class="form-control" placeholder="Penerima" required>
+                </div>
                 @endif
+                <div class="form-group">
+                    <label class="required" for="bidang">Bidang</label>
+                    <input name="bidang" type="text" class="form-control" placeholder="Bidang" required>
+                </div>
                 @endcan
                 @can('pengarahan_edit_petugas_arsip')
                 <div class="form-group">

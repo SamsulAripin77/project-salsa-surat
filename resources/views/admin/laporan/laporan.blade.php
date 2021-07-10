@@ -42,7 +42,7 @@
                         <td>
                             {{$no++}}
                         </td>
-                        <td>{{$item->updated_at->diffForHumans() ?? ''}}</td>
+                        <td>{{$item->updated_at->format('d/m/Y') ?? ''}}</td>
                         <td>{{$item->tgl_surat ?? ''}}</td> 
                         <td>{{$item->no_surat ?? ''}}</td>
                         @if ($label == 'Surat Masuk')
@@ -126,8 +126,10 @@ $(function () {
         },
     dom: 'Bfrtip',
     buttons: [
-        {extend: 'pdf', title: 'laporan ' + label},
-        'excel',
+        @can('pengarahan_edit_petugas_arsip')
+        {extend: 'pdf', text:'Export PDF', title: 'laporan ' + label, className: 'btn-danger'},
+        {extend: 'excel', text: 'Export Excel', title: 'laporan' + label, className: 'btn-info'}
+        @endcan
     ]  })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()

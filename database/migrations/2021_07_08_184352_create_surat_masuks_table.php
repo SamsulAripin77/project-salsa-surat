@@ -22,7 +22,7 @@ class CreateSuratMasuksTable extends Migration
             $table->string('lampiran')->nullable();
             $table->string('hal')->nullable();
             $table->unsignedBigInteger('kategori_id');
-            $table->string('alamat')->nullable();
+            $table->string('bidang')->nullable();
             $table->string('keterangan')->nullable();
             $table->string('status')->nullable()->default('pending');
             $table->unsignedBigInteger('user_id');
