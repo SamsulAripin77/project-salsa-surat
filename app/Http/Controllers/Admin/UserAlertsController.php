@@ -33,6 +33,7 @@ class UserAlertsController extends Controller
 
     public function store(StoreUserAlertRequest $request)
     {
+        // return $request;
         $userAlert = UserAlert::create($request->all());
         $userAlert->users()->sync($request->input('users', []));
 

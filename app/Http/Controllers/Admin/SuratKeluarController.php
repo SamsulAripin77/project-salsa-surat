@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\{SuratKeluar,Kategori};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\{User,UserAlert};
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Gate;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,7 @@ class SuratKeluarController extends Controller
     public function index()
     {
         abort_if(Gate::denies('surat_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $surats = SuratKeluar::simplePaginate(5);
+        $surats = SuratKeluar::latest()->simplePaginate(10);
         return view('admin.surats.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
@@ -54,6 +56,14 @@ class SuratKeluarController extends Controller
                             'hal' => $request->get('hal'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()]);
+
+        $userAlert = UserAlert::create([
+            'alert_text' => 'surat keluar baru untuk di periksa',
+        ]);
+        $roles = User::with(['roles'])->whereHas('roles', function (Builder $query) {
+            $query->where('title', '=', 'sekertaris');
+        })->pluck('id')->toArray();
+        $userAlert->users()->sync($roles);
         return redirect()->route('admin.suratkeluars.index')->with('message','Input Berhasil');
     }
 

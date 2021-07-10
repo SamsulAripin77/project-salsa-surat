@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\{SuratMasuk,Kategori};
 use Illuminate\Support\Facades\Auth;
+use App\Models\{User,UserAlert};
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Gate;
@@ -19,7 +21,7 @@ class PengarahanSuratMasukController extends Controller
     public function index()
     {
         abort_if(Gate::denies('pengarahan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $surats = SuratMasuk::simplePaginate(5);
+        $surats = SuratMasuk::latest()->simplePaginate(10);
         return view('admin.pengarahans.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
@@ -60,19 +62,33 @@ class PengarahanSuratMasukController extends Controller
     public function update(Request $request, SuratMasuk $suratMasuk, $id)
     {   
         $surat = SuratMasuk::find($id);
-
+   
         if ($request->get('penerima')){
             $surat->update([
                 'penerima' => $request->get('penerima'),
                 'bidang' => $request->get('bidang'),
                 'user_id' => Auth::id()
             ]);
+            $userAlert = UserAlert::create([
+                'alert_text' => 'surat masuk ditanggapi sekertaris',
+            ]);
+            $roles = User::with(['roles'])->whereHas('roles', function (Builder $query) {
+                $query->where('title', '=', 'petugas_arsip');
+            })->pluck('id')->toArray();
+            $userAlert->users()->sync($roles);
         }else {
             $surat->update([
                 'keterangan' => $request->get('keterangan'),
                 'status' => $request->get('status'),
                 'user_id' => Auth::id()
             ]);
+            $userAlert = UserAlert::create([
+                'alert_text' => 'surat masuk ditanggapi petugas arsip',
+            ]);
+            $roles = User::with(['roles'])->whereHas('roles', function (Builder $query) {
+                $query->where('title', '=', 'sekertaris');
+            })->pluck('id')->toArray();
+            $userAlert->users()->sync($roles);
         }
 
      
