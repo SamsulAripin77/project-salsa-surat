@@ -16,7 +16,7 @@
                     </tr>
                     <tr>
                         <th>Tanggal Input</th>
-                        <th>{{$surat->updated_at->format('d/m/Y')}} ?? ''}}</th>
+                        <th>{{$surat->updated_at->format('d/m/Y') ?? ''}}</th>
                     </tr>
                     <tr>
                         <th>Nomor Surat</th>
