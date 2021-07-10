@@ -53,7 +53,7 @@
                         <td>{{$item->penerima ?? ''}}</td>
                         <td>{{$item->hal ?? ''}}</td>
                         <td>{{$item->kategoris->nama ?? ''}}</td>
-                        <td>{{$item->alamat ?? ''}}</td>
+                        <td>{{$item->bidang ?? ''}}</td>
                         <td>{{$item->keterangan ?? ''}}</td>
                         <td>
                             @if ($item->status == 'pending')
@@ -83,7 +83,7 @@
                             @endif
                             <th>Hal</th>
                             <th>Kode Surat</th>
-                            <th>Alamat</th>
+                            <th>Bidang</th>
                             <th>Keterangan</th>
                             <th>Status</th>
                         </tr>
