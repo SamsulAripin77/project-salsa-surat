@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\{SuratKeluar,kategori};
+use App\{SuratKeluar,Kategori};
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
