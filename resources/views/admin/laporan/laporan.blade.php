@@ -127,7 +127,12 @@ $(function () {
     dom: 'Bfrtip',
     buttons: [
         @can('pengarahan_edit_petugas_arsip')
-        {extend: 'pdf', text:'Export PDF', title: 'laporan ' + label, className: 'btn-danger'},
+        {extend: 'pdf', text:'Export PDF', title: 'laporan ' + label, className: 'btn-danger',customize: function ( doc ) {
+        doc.content.push({text:'Mengetahui',margin:[240,20,20,20]});
+        doc.content.push({text: 'Sekertaris',margin:[240,40,20,20]});
+        doc.content.push({text:'Menyetujui',margin:[400,-30,20,20]});
+        doc.content.push({text: 'Petugas Arsip' ,margin:[400,-100,20,20]});
+        }},
         {extend: 'excel', text: 'Export Excel', title: 'laporan' + label, className: 'btn-info'}
         @endcan
     ]  })
