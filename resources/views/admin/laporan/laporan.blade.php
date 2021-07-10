@@ -133,7 +133,7 @@ $(function () {
     dom: 'Bfrtip',
     buttons: [
         @can('pengarahan_edit_petugas_arsip')
-        {extend: 'pdf', text:'Export PDF', title: '' + label, className: 'btn-danger',customize: function ( doc ) {
+        {extend: 'pdf', text:'Export PDF', title: 'Laporan '+ label + ' Dinas Perhubungan Kabupaten Sukabumi', className: 'btn-danger',customize: function ( doc ) {
         doc.content.push({text:'Mengetahui',margin:[80,20,20,20]});
         doc.content.push({text:'Sekertaris',margin:[80,-20,20,20]});
         doc.content.push({text:'(...........................................)',margin:[50,40,20,20]});
@@ -141,7 +141,7 @@ $(function () {
         doc.content.push({text:'Sukabumi, '+ dateday ,margin:[380,-120,20,20]});
         doc.content.push({text:'Petugas Arsip' ,margin:[380,-20,20,20]});
         }},
-        {extend: 'excel', text: 'Export Excel', title: 'Laporan '+ label+ ' Dinas Perhubungan Kabupaten Sukabumi', className: 'btn-info',}
+        {extend: 'excel', text: 'Export Excel', title: 'Laporan '+ label + ' Dinas Perhubungan Kabupaten Sukabumi', className: 'btn-info',}
         @endcan
     ]  })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
