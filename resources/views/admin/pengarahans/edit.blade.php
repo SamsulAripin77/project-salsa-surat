@@ -33,12 +33,12 @@
                     <label class="required" for="bidang">Bidang</label>
                     <input name="bidang" type="text" class="form-control" placeholder="Bidang" required>
                 </div>
-                @endcan
-                @can('pengarahan_edit_petugas_arsip')
                 <div class="form-group">
                     <label class="required" for="hal">Keterangan</label>
                     <input name="keterangan" type="text" class="form-control" placeholder="keterangan" required>
                 </div>
+                @endcan
+                @can('pengarahan_edit_petugas_arsip')
                 <div class="form-group">
                     <label class="required" for="status">Status</label>
                     <select name="status" id="kategori" class="form-control" required>

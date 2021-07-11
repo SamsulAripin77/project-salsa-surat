@@ -66,6 +66,7 @@ class PengarahanSuratMasukController extends Controller
         if ($request->get('penerima')){
             $surat->update([
                 'penerima' => $request->get('penerima'),
+                'keterangan' => $request->get('keterangan'),
                 'bidang' => $request->get('bidang'),
                 'user_id' => Auth::id()
             ]);
@@ -78,7 +79,6 @@ class PengarahanSuratMasukController extends Controller
             $userAlert->users()->sync($roles);
         }else {
             $surat->update([
-                'keterangan' => $request->get('keterangan'),
                 'status' => $request->get('status'),
                 'user_id' => Auth::id()
             ]);
