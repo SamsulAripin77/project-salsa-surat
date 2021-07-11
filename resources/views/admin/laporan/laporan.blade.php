@@ -31,6 +31,7 @@
                         <th>Bidang</th>
                         <th>Keterangan</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +67,7 @@
                                 <span class="badge badge-info">{{$item->status ?? ''}}</span>
                             @endif
                         </td>
+                        <td></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -86,6 +88,7 @@
                             <th>Bidang</th>
                             <th>Keterangan</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                 </tfoot>
             </table>
@@ -116,6 +119,9 @@ $(function () {
         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
     } );
   let table = $('.datatable-laporan:not(.ajaxTable)').DataTable({
+  "scrollY": "400px",
+  "scrollCollapse": true,
+  "paging": false,
     initComplete: function () {
             // Apply the search
             this.api().columns().every( function () {
