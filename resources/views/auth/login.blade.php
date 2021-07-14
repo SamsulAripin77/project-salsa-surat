@@ -3,7 +3,7 @@
 <div class="row p-3 mb-5 justify-content-center text-center">
     <div class="col-lg-12 col-md-12">
         <img src="https://homepages.cae.wisc.edu/~ece533/images/airplane.png" alt="" width="100" height="100">
-        <h3 class="text-center">Sistem Informasi Pengelolaan Surat ok</h3>
+        <h3 class="text-center">Sistem Informasi Pengelolaan Surat</h3>
         <h3 class="text-center">Dinas Perhubungan Kabupaten Sukabumi</h3>
     </div>
 </div>
