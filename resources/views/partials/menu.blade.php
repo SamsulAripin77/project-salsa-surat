@@ -64,7 +64,7 @@
                 <i class="fa-fw fas fa-sticky-note c-sidebar-nav-icon">
 
                 </i>
-               Data Surat
+               Pendataan Surat
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
