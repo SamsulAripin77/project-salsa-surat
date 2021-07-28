@@ -55,7 +55,7 @@
                         <th>{{$surat->hal ?? ''}}</th>
                     </tr>
                     <tr>
-                        <th>Alamat</th>
+<th>Bidang</th>
                         <th>{{$surat->bidang ?? ''}}</th>
                     </tr>
                     <tr>
