@@ -35,7 +35,12 @@
                     <label class="required" for="hal">Perihal</label>
                     <input name="hal" type="text" class="form-control" placeholder="hal" required>
                 </div>
-              
+@if ($label == 'Surat Keluar')
+                <div class="form-group">
+                    <label class="required" for="penerima">Penerima</label>
+                    <input name="penerima" type="text" class="form-control" placeholder="Penerima" required>
+                </div>
+                @endif
                 <div class="form-group">
                     <label class="required" for="pengirim">lampiran</label>
                     <input name="lampiran" type="file" class="form-control" placeholder="lampiran" required>

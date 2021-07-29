@@ -54,6 +54,7 @@ class SuratKeluarController extends Controller
                             'tgl_surat' => $request->get('tgl_surat'),
                             'no_surat' => $request->get('no_surat'),
                             'hal' => $request->get('hal'),
+                            'penerima' => $request->get('penerima'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()]);
 
@@ -117,6 +118,7 @@ class SuratKeluarController extends Controller
                             'tgl_surat' => $request->get('tgl_surat'),
                             'no_surat' => $request->get('no_surat'),
                             'hal' => $request->get('hal'),
+                            'penerima' => $request->get('penerima'),
                             'kategori_id' => $request->get('kategori_id'),
                             'user_id' => Auth::id()
         ]);

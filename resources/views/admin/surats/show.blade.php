@@ -61,7 +61,17 @@
                     <tr>
                         <th>Status</th>
 
-                        <th><span class="badge badge-warning">{{$surat->status ?? ''}}</span></th>
+                        <th>
+                            @if ($surat->status == 'pending')
+                            <span class="badge badge-warning">{{$surat->status ?? ''}}</span>
+                            @endif
+                            @if ($surat->status == 'reject')
+                            <span class="badge badge-danger">{{$surat->status ?? ''}}</span>
+                            @endif
+                            @if ($surat->status == 'accept')
+                            <span class="badge badge-info">{{$surat->status ?? ''}}</span>
+                            @endif
+                        </th>
                     </tr>
                 </tbody>
             </table>
