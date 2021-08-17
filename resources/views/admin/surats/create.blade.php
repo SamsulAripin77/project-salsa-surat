@@ -11,7 +11,7 @@
                 @csrf
                 <div class="form-group">
                     <label class="required" for="kategori_id">Kode Surat</label>
-                    <select name="kategori_id" id="kategori" class="form-control" required>
+                    <select name="kategori_id" id="kategori" class="form-control" required autofocus>
                         @foreach ($kategoris as $id => $item)
                             <option value="{{ $id }}">{{$item}}</option>
                         @endforeach

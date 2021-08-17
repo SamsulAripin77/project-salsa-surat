@@ -49,7 +49,10 @@ class PengarahanSuratMasukController extends Controller
         abort_if(Gate::denies('pengarahan_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surat = SuratMasuk::findOrFail($id);
         $kategoris = Kategori::all()->pluck('nama','id')->prepend('Pilih kategori','');
-        return view('admin.pengarahans.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label]);
+        $penerimas = User::with(['roles'])->whereHas('roles', function (Builder $query) {
+            $query->where('title', '=', 'penerima');
+        })->get();
+        return view('admin.pengarahans.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label, 'penerimas' => $penerimas]);
     }
 
     /**

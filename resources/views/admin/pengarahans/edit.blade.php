@@ -25,8 +25,18 @@
                 </div> 
                 @else 
                 <div class="form-group">
-                    <label class="required" for="pengirim">Penerima</label>
-                    <input name="penerima" type="text" class="form-control" placeholder="Penerima" required>
+                    <label class="required" for="roles">Penerima</label>
+                    <select class="form-control select2 {{ $errors->has('penerima') ? 'is-invalid' : '' }}" name="penerima" id="penerima" required>
+                        @foreach($penerimas as $penerima)
+                            <option value="{{ $penerima->name }}" {{ old('penerima') ? 'selected' : '' }}>{{ $penerima->name }}</option>
+                        @endforeach
+                    </select>
+                    @if($errors->has('penerima'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('roles') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.user.fields.roles_helper') }}</span>
                 </div>
                 @endif
                 <div class="form-group">
