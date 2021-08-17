@@ -22,6 +22,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('suratkeluars','SuratKeluarController');
 
     //pengarahan surat masuks
+    Route::get('pengarahansuratmasuks/penerima','PengarahanSuratMasukController@penerima_edit');
+    Route::put('pengarahansuratmasuks/penerima','PengarahanSuratMasukController@penerima_update');
     Route::resource('pengarahansuratmasuks','PengarahanSuratMasukController');
 
      //pengarahan surat keluar

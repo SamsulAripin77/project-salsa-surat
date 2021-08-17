@@ -22,6 +22,13 @@ class PengarahanSuratMasukController extends Controller
     {
         abort_if(Gate::denies('pengarahan_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $surats = SuratMasuk::latest()->simplePaginate(10);
+        $role = Auth::user()->roles->first()->title;
+        $auth_name = Auth::user()->name;
+        if ($role == 'penerima'){
+            $surats = SuratMasuk::where('penerima', $auth_name)->latest()->simplePaginate(10); 
+        }
+        
+        // return $role;
         return view('admin.pengarahans.index', ['surats' => $surats, 'label'=> $this->label]);
     }
 
@@ -97,6 +104,15 @@ class PengarahanSuratMasukController extends Controller
      
 
         return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Update Berhasil');
+    }
+
+    public function penerima_edit(Request $request) {
+        // $surat = SuratMasuk::findOrFail($id);
+        // return view('admin.pengarahans.edit',['surat'=>$surat,'kategoris'=>$kategoris,'label'=>$this->label, 'penerimas' => $penerimas]);
+    }
+
+    public function penerima_update(Request $request) {
+
     }
 
 

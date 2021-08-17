@@ -58,7 +58,7 @@ class User extends Authenticatable implements HasMedia
 
     public function getIsAdminAttribute()
     {
-        return $this->roles()->where('title', 'Admin')->exists() || $this->roles()->where('title', 'sekertaris')->exists() || $this->roles()->where('title', 'petugas_arsip')->exists();
+        return $this->roles()->where('title', 'Admin')->exists() || $this->roles()->where('title', 'sekertaris')->exists() || $this->roles()->where('title', 'petugas_arsip')->exists() || $this->roles()->where('title', 'penerima')->exists();
     }
 
     public function registerMediaConversions(Media $media = null)

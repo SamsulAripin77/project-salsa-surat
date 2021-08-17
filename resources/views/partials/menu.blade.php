@@ -87,12 +87,18 @@
         </li>
         @endcan
         @can('pengarahan_access')
+        @cannot('penerima')
         <li class="c-sidebar-nav-dropdown {{ request()->is("admin/pengarahansuratmasuks*") ? "c-show" : "" }} {{ request()->is("admin/pengarahansuratkeluars*") ? "c-show" : "" }}">
             <a class="c-sidebar-nav-dropdown-toggle" href="#">
                 <i class="fa-fw fas fa-book c-sidebar-nav-icon">
 
                 </i>
-               Pengarahan Surat
+                @can('pengarahan_edit_sekertaris')
+                Buat Pengarahan Surat
+                @endcan
+                @cannot('pengarahan_edit_sekertaris')
+                Pengarahan Surat
+                @endcannot
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
                 <li class="c-sidebar-nav-item">
@@ -113,6 +119,7 @@
                 </li>
             </ul>
         </li>
+        @endcan
         @endcan
         @can('surat_laporan')
         <li class="c-sidebar-nav-dropdown {{ request()->is("admin/surat-masuks/laporan*") ? "c-show" : "" }} {{ request()->is("admin/surat-keluars/laporan*") ? "c-show" : "" }}">
@@ -149,6 +156,16 @@
                     
                 </i>
                 Kode Surat
+            </a>
+        </li>
+        @endcan
+        @can('penerima')
+        <li class="c-sidebar-nav-item">
+            <a href="{{route('admin.pengarahansuratmasuks.index')}}" class="c-sidebar-nav-link {{request()->is("admin/pengarahansuratmasuks") || request()->is("admin/pengarahansuratmasuks/*") ? "c-active": ""}}">
+                <i class="fa-fw fas fa-file-alt c-sidebar-nav-icon">
+                    
+                </i>
+                Kotak Masuk
             </a>
         </li>
         @endcan
