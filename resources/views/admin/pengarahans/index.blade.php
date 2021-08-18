@@ -6,7 +6,11 @@
 </div>
 <div class="card"></div>        
     <div class="card-header">
-        Pengarahan {{$label}}
+        @if (Auth::user()->can('penerima'))
+            Surat Masuk
+        @else
+            Pengarahan {{$label}}
+        @endif
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -23,6 +27,9 @@
                         @endif
                         <th>Bidang</th>
                         <th>keterangan</th>
+                        @if ($label == 'Surat Masuk')
+                        <th>Tanggapan Penerima</th>
+                        @endif
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -44,6 +51,9 @@
                         <td>
                             {{$item->keterangan}}
                         </td>
+                        @if ($label == 'Surat Masuk')
+                        <td>{{$item->comment ?? ''}}</td>
+                        @endif
                         <td>
                             @if ($item->status == 'pending')
                                 <span class="badge badge-warning">{{$item->status ?? ''}}</span>
@@ -53,6 +63,9 @@
                             @endif
                             @if ($item->status == 'accept')
                                 <span class="badge badge-info">{{$item->status ?? ''}}</span>
+                            @endif
+                            @if ($item->status == 'replied')
+                            <span class="badge badge-primary">{{$item->status ?? ''}}</span>
                             @endif
                         </td>
                         <td>
@@ -68,7 +81,11 @@
                             @endif
                                 @if ($label == 'Surat Masuk')
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.pengarahansuratmasuks.edit', $item->id) }}">
-                                    {{ trans('global.edit') }}
+                                     @if (Auth::user()->can('penerima'))
+                                         Balas
+                                     @else
+                                        {{ trans('global.edit') }}
+                                     @endif
                                 </a>
                                 @else
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.pengarahansuratkeluars.edit', $item->id) }}">

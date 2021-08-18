@@ -51,12 +51,8 @@
                         <th>{{$surat->hal ?? ''}}</th>
                     </tr>
                     <tr>
-<th>Bidang</th>
+                        <th>Bidang</th>
                         <th>{{$surat->bidang ?? ''}}</th>
-                    </tr>
-                    <tr>
-                        <th>Keterangan</th>
-                        <th>{{$surat->keterangan ?? ''}}</th>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -70,6 +66,9 @@
                             @endif
                             @if ($surat->status == 'accept')
                             <span class="badge badge-info">{{$surat->status ?? ''}}</span>
+                            @endif
+                            @if ($surat->status == 'replied')
+                            <span class="badge badge-primary">{{$surat->status ?? ''}}</span>
                             @endif
                         </th>
                     </tr>

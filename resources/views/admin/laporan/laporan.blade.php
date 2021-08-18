@@ -23,6 +23,7 @@
                         @if ($label == 'Surat Masuk')
                             <th>Pengirim</th>
                             <th>Penerima</th>
+                            <th>Tanggapan Penerima</th>
                         @else 
                             <th>Penanggung Jawab</th>
                         @endif
@@ -49,6 +50,7 @@
                         @if ($label == 'Surat Masuk')
                              <td>{{$item->pengirim ?? ''}}</td>
                              <td>{{$item->penerima ?? ''}}</td>
+                             <td>{{$item->comment ?? ''}}</td>
                         @else 
                              <td>{{$item->penanggung_jawab ?? ''}}</td>
                         @endif
@@ -66,6 +68,9 @@
                             @if ($item->status == 'accept')
                                 <span class="badge badge-info">{{$item->status ?? ''}}</span>
                             @endif
+                            @if ($item->status == 'replied')
+                            <span class="badge badge-primary">{{$item->status ?? ''}}</span>
+                        @endif
                         </td>
                         <td></td>
                     </tr>

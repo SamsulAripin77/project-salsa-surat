@@ -45,7 +45,6 @@
                         @if ($label == 'Surat Masuk')
                              <td>{{$item->pengirim ?? ''}}</td>
                         @endif
-                        
                         <td>
                             @if ($item->status == 'pending')
                                 <span class="badge badge-warning">{{$item->status ?? ''}}</span>
@@ -55,6 +54,9 @@
                             @endif
                             @if ($item->status == 'accept')
                                 <span class="badge badge-info">{{$item->status ?? ''}}</span>
+                            @endif
+                            @if ($item->status == 'replied')
+                            <span class="badge badge-primary">{{$item->status ?? ''}}</span>
                             @endif
                         </td>
                         <td>

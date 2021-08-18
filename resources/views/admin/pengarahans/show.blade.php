@@ -64,6 +64,16 @@
                     <th>Keterangan</th>
                     <th>{{$surat->keterangan ?? ''}}</th>
                 </tr>
+                @if ($label== 'Surat Masuk')
+                <tr>
+                    <th>
+                        Tanggapan Penerima
+                    </th>
+                    <th>
+                        {{$surat->comment}}
+                    </th>
+                </tr>
+                @endif
                 <tr>
                     <th>Status</th>
                     <th>
@@ -75,6 +85,9 @@
                         @endif
                         @if ($surat->status == 'accept')
                         <span class="badge badge-info">{{$surat->status ?? ''}}</span>
+                        @endif
+                        @if ($surat->status == 'replied')
+                        <span class="badge badge-primary">{{$surat->status ?? ''}}</span>
                         @endif
                     </th>
                 </tr>

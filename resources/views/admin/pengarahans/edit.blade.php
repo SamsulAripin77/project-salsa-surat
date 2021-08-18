@@ -17,11 +17,17 @@
             @endif
                 @csrf
                 @method('PUT')
+                @can('penerima')
+                <div class="form-group">
+                    <label class="required" for="hal">Tanggapan</label>
+                    <input name="comment" type="text" class="form-control" placeholder="Tanggapan" required> 
+                </div>
+                @endcan
                 @can('pengarahan_edit_sekertaris')
                 @if ($label == 'Surat Keluar')
                 <div class="form-group">
                     <label class="required" for="hal">Penanggung Jawab</label>
-                    <input name="penanggung_jawab" type="text" class="form-control" placeholder="penanggung_jawab" required>
+                    <input name="penanggung_jawab" type="text" value="{{ old('bidang', $surat->penanggung_jawab) }}" class="form-control" placeholder="penanggung_jawab" required>
                 </div> 
                 @else 
                 <div class="form-group">
@@ -41,11 +47,11 @@
                 @endif
                 <div class="form-group">
                     <label class="required" for="bidang">Bidang</label>
-                    <input name="bidang" type="text" class="form-control" placeholder="Bidang" required>
+                    <input name="bidang" value="{{ old('bidang', $surat->bidang) }}" type="text" class="form-control" placeholder="Bidang" required>
                 </div>
                 <div class="form-group">
                     <label class="required" for="hal">Keterangan</label>
-                    <input name="keterangan" type="text" class="form-control" placeholder="keterangan" required>
+                    <input name="keterangan" value="{{ old('bidang', $surat->keterangan) }}" type="text" class="form-control" placeholder="keterangan" required>
                 </div>
                 @endcan
                 @can('pengarahan_edit_petugas_arsip')

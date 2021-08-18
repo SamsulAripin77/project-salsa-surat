@@ -87,7 +87,20 @@ class PengarahanSuratMasukController extends Controller
                 $query->where('title', '=', 'petugas_arsip');
             })->pluck('id')->toArray();
             $userAlert->users()->sync($roles);
-        }else {
+        }else if ($request->get('comment')){
+            $surat->update([
+                'comment' => $request->get('comment'),
+                'status' => 'replied',
+            ]);
+            $userAlert = UserAlert::create([
+                'alert_text' => 'surat masuk ditanggapi penerima',
+            ]);
+            $roles = User::with(['roles'])->whereHas('roles', function (Builder $query) {
+                $query->where('title', '=', 'petugas_arsip');
+            })->pluck('id')->toArray();
+            $userAlert->users()->sync($roles);
+        }
+        else {
             $surat->update([
                 'status' => $request->get('status'),
                 'user_id' => Auth::id()
@@ -100,8 +113,6 @@ class PengarahanSuratMasukController extends Controller
             })->pluck('id')->toArray();
             $userAlert->users()->sync($roles);
         }
-
-     
 
         return redirect()->route('admin.pengarahansuratmasuks.index')->with('message','Update Berhasil');
     }
