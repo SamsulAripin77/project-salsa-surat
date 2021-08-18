@@ -16,11 +16,13 @@
                                 <h3>Surat Masuk</h3>
                                 <h4>{{$masukCount}}</h4>
                         </div>
+                        @if (! Auth::user()->can('penerima'))
                         <div class="col-lg-6 col-md-6 col-xs-12 text-center">
                                 <h1><i class="fa fa-envelope-open"></i></h1>
                                 <h3>Surat Keluar</h3>
                                 <h4>{{$keluarCount}}</h4>
                         </div>
+                        @endif
                     </div>
                   </div>
             </div>
@@ -30,7 +32,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
+                    @if (! Auth::user()->can('penerima'))
                     <canvas id="myChart" width="400" height="150"></canvas>
+                    @endif
                 </div>
             </div>
         </div>
