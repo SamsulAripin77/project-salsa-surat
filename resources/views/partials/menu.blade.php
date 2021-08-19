@@ -97,7 +97,7 @@
                 Buat Pengarahan Surat
                 @endcan
                 @cannot('pengarahan_edit_sekertaris')
-                Pengarahan Surat
+                Cek Pengarahan Surat
                 @endcannot
             </a>
             <ul class="c-sidebar-nav-dropdown-items">
